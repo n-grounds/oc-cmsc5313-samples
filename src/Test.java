@@ -17,11 +17,14 @@ public class Test
 
         frame.setLayout( new BorderLayout() );
         final JButton b = new JButton( "Click Me" );
-        final JLabel l = new JLabel();
+        final JLabel l = new JLabel( "You haven't clicked the button, yet");
         b.addActionListener( new ActionListener() {
+            int counter = 0;
+
             public void actionPerformed( final ActionEvent e )
             {
-                l.setText( "You clicked the button" );
+                counter++;
+                l.setText( "You clicked the button " + counter + " times" );
             }
         } );
         frame.add( b, BorderLayout.NORTH );
