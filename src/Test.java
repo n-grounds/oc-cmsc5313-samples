@@ -28,7 +28,7 @@ public class Test
         frame.add( l, BorderLayout.SOUTH );
 
         final JLabel imgLabel = new JLabel();
-        imgLabel.setIcon( new ImageIcon( "/home/nic/steve.jpg" ) );
+        imgLabel.setIcon( new ImageIcon( "steve.jpg" ) );
         frame.add( imgLabel, BorderLayout.CENTER );
 
         frame.setVisible( true );
