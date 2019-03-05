@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,6 +26,10 @@ public class Test
         } );
         frame.add( b, BorderLayout.NORTH );
         frame.add( l, BorderLayout.SOUTH );
+
+        final JLabel imgLabel = new JLabel();
+        imgLabel.setIcon( new ImageIcon( "/home/nic/steve.jpg" ) );
+        frame.add( imgLabel, BorderLayout.CENTER );
 
         frame.setVisible( true );
     }
