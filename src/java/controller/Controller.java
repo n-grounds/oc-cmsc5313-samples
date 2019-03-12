@@ -1,6 +1,9 @@
 
 package controller;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
 import javax.swing.JSpinner;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -26,6 +29,17 @@ public class Controller
                     int v = ((Number)((JSpinner)e.getSource()).getValue()).intValue();
                     model.setNumSides( v );
                 }   
+            }
+        };
+    }
+
+    public ItemListener getColorItemListener()
+    {
+        return new ItemListener() {
+            @Override
+            public void itemStateChanged( final ItemEvent e )
+            {
+                model.setColor( e.getItem().toString() );
             }
         };
     }

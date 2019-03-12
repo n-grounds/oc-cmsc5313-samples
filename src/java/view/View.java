@@ -30,7 +30,10 @@ public class View
                 model.getNumSides(), 3, 10, 1 ) );
         spinner.addChangeListener( controller.getNumSidesChangeListener() );
         controls.add( spinner );
-        final JComboBox combo = new JComboBox();
+        final JComboBox combo = new JComboBox(
+                new String[] { "black", "red", "blue", "green" } );
+        combo.setSelectedIndex( 0 );
+        combo.addItemListener( controller.getColorItemListener() );
         controls.add( combo );
         add( controls, BorderLayout.NORTH );
 

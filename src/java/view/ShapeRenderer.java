@@ -1,6 +1,7 @@
 
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JComponent;
@@ -21,6 +22,14 @@ public class ShapeRenderer
     protected void paintComponent( final Graphics g )
     {
         final int numSides = model.getNumSides();
+        g.setColor( model.getColor().equals( "black" )
+                ? Color.BLACK
+                : model.getColor().equals( "red" )
+                ? Color.RED
+                : model.getColor().equals( "green" )
+                ? Color.GREEN
+                : Color.BLUE );
+
         final int width = Math.min( g.getClipBounds().width,
                 g.getClipBounds().height ) / 2 - 10;
         int x = g.getClipBounds().width / 2,
