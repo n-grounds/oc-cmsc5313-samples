@@ -31,7 +31,7 @@ public class ShapeRenderer
                 : Color.BLUE );
 
         final int width = Math.min( g.getClipBounds().width,
-                g.getClipBounds().height ) / 2 - 10;
+                g.getClipBounds().height ) / 2 - 5;
         int x = g.getClipBounds().width / 2,
                 y = 5;
         for( int n = 1; n <= numSides; n++ ) {
