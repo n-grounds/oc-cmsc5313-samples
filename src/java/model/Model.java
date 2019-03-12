@@ -10,4 +10,9 @@ public class Model
         this.numSides = 3;
         this.color = "black";
     }
+
+    public int getNumSides()
+    {
+        return numSides;
+    }
 }

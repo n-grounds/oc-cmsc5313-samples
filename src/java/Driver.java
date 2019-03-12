@@ -16,7 +16,7 @@ public class Driver
         final Model model = new Model();
 
         //next, constuct View (or Controller)
-        final View view = new View();
+        final View view = new View( model );
         frame.setContentPane( view );
 
         frame.setVisible( true );
