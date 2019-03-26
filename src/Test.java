@@ -5,6 +5,12 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.chart.Axis;
+import javafx.scene.chart.Chart;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -27,6 +33,8 @@ public class Test
         launch( args );
     }
 
+    XYChart.Series<Number,Number> s;
+
     @Override
     public void start( final Stage primaryStage )
         throws Exception
@@ -45,21 +53,12 @@ public class Test
         final Pane bPane = new HBox( b );
         bPane.setPadding( new Insets( 50, 0, 30, 50 ) );
         final Label l = new Label();
-        b.setOnAction( e -> {
-            l.setText( "You clicked the button" );
-        } );
 
         final Node n = new Rectangle( 40, 40, Color.BLUE );
-        n.setOnMouseClicked( e -> {
-            double x = e.getSceneX(), y = e.getSceneY();
-            l.setText( String.format(
-                "You clicked the square at location %.0f,%.0f",
-                x, y ) );
-        } );
 
         final TranslateTransition tt = new TranslateTransition(
-            Duration.millis( 1500 ), n );
-        tt.byXProperty().set( 200.0 );
+            Duration.millis( 5000 ), n );
+        tt.byXProperty().set( 400.0 );
         tt.setAutoReverse( true );
         tt.setCycleCount( TranslateTransition.INDEFINITE );
         final RotateTransition rt = new RotateTransition(
@@ -67,9 +66,35 @@ public class Test
         rt.setByAngle( 360.0 );
         rt.setCycleCount( RotateTransition.INDEFINITE );
         final ParallelTransition pt = new ParallelTransition( tt, rt );
-        
+
+        final LineChart c = new LineChart<Number,Number>(
+            new NumberAxis( "X", 0.0, 400.0, 20.0 ),
+            new NumberAxis( "Y", 0.0, 500.0, 20.0 ) );
+        c.setTitle( "Where You've Clicked" );
+        c.setAnimated( false );
+        c.setLegendVisible( false );
+        final XYChart.Series<Number,Number> series = new XYChart.Series<>();
+        series.setName( "Clicks" );
+        c.getData().add( series );
+        final XYChart.Series<Number,Number> series2 = new XYChart.Series<>();
+        series2.setName( "More Clicks" );
+        c.getData().add( series2 );
+        s = series;
+
+        b.setOnAction( e -> {
+            l.setText( "You clicked the button" );
+            s = (s == series) ? series2 : series;
+        } );
+        n.setOnMouseClicked( e -> {
+            double x = e.getSceneX(), y = e.getSceneY();
+            l.setText( String.format(
+                "You clicked the square at location %.0f,%.0f",
+                x, y ) );
+            s.getData().add( new Data<Number,Number>( x, y ) );
+        } );
+
         primaryStage.setScene( new Scene(
-            new VBox( bar, bPane, l, n ),
+            new VBox( bar, bPane, l, n, c ),
             500, 400 ) );
         primaryStage.show();
 
