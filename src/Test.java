@@ -1,3 +1,5 @@
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -52,12 +54,17 @@ public class Test
         tt.byXProperty().set( 200.0 );
         tt.setAutoReverse( true );
         tt.setCycleCount( TranslateTransition.INDEFINITE );
+        final RotateTransition rt = new RotateTransition(
+            Duration.seconds( 1.0 ), b );
+        rt.setByAngle( 360.0 );
+        rt.setCycleCount( RotateTransition.INDEFINITE );
+        final ParallelTransition pt = new ParallelTransition( tt, rt );
         
         primaryStage.setScene( new Scene(
             new VBox( bar, bPane, l ),
             500, 400 ) );
         primaryStage.show();
 
-        tt.play();
+        pt.play();
     }
 }
