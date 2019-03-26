@@ -1,5 +1,7 @@
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,7 +11,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Test
     extends Application
@@ -40,10 +45,19 @@ public class Test
         b.setOnAction( e -> {
             l.setText( "You clicked the button" );
         } );
+
+        // final Node n = new Circle( 40, Color.BLUE );
+        final TranslateTransition tt = new TranslateTransition(
+            Duration.millis( 1500 ), b );
+        tt.byXProperty().set( 200.0 );
+        tt.setAutoReverse( true );
+        tt.setCycleCount( TranslateTransition.INDEFINITE );
         
         primaryStage.setScene( new Scene(
             new VBox( bar, bPane, l ),
             500, 400 ) );
         primaryStage.show();
+
+        tt.play();
     }
 }
