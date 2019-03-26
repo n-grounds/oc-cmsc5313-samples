@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -48,20 +49,27 @@ public class Test
             l.setText( "You clicked the button" );
         } );
 
-        // final Node n = new Circle( 40, Color.BLUE );
+        final Node n = new Rectangle( 40, 40, Color.BLUE );
+        n.setOnMouseClicked( e -> {
+            double x = e.getSceneX(), y = e.getSceneY();
+            l.setText( String.format(
+                "You clicked the square at location %.0f,%.0f",
+                x, y ) );
+        } );
+
         final TranslateTransition tt = new TranslateTransition(
-            Duration.millis( 1500 ), b );
+            Duration.millis( 1500 ), n );
         tt.byXProperty().set( 200.0 );
         tt.setAutoReverse( true );
         tt.setCycleCount( TranslateTransition.INDEFINITE );
         final RotateTransition rt = new RotateTransition(
-            Duration.seconds( 1.0 ), b );
+            Duration.seconds( 1.0 ), n );
         rt.setByAngle( 360.0 );
         rt.setCycleCount( RotateTransition.INDEFINITE );
         final ParallelTransition pt = new ParallelTransition( tt, rt );
         
         primaryStage.setScene( new Scene(
-            new VBox( bar, bPane, l ),
+            new VBox( bar, bPane, l, n ),
             500, 400 ) );
         primaryStage.show();
 
