@@ -11,9 +11,9 @@ document.getElementById('my-btn')
         const div = document.getElementById('content');
         //add new HTML element to div with the my-text value
         //as it's content
-        const span = document.createElement('span');
-        span.appendChild(document.createTextNode( v ));
-        div.appendChild(span);
+        const element = document.createElement('div');
+        element.appendChild(document.createTextNode( v ));
+        div.appendChild(element);
         document.getElementById('my-text').value = '';
     });
 
