@@ -7,7 +7,7 @@ function createWindow() {
 	win.loadURL(`file://${__dirname}/index.html`);
 }
 
-electron.ipcMain.on('some-call', (args) => {
+electron.ipcMain.on('some-call', (event, args) => {
     console.log(args);
 });
 
